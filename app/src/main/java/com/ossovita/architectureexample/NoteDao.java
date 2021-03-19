@@ -25,7 +25,7 @@ public interface NoteDao {
     void deleteAllNotes(); //database'den tüm notları silecek
 
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
-    LiveData<List<Note>> getAllNotes(); //notları priority propertysine göre sıralayıp liste olarak döndürecek
+    LiveData<List<Note>> getAllNotes(); ////notları priority propertysine göre sıralayıp liste olarak döndürecek
 
 
 }
