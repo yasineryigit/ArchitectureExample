@@ -22,10 +22,10 @@ public interface NoteDao {
     void delete(Note note);
 
     @Query("DELETE FROM note_table")
-    void deleteAllNotes(); //database'den tüm notları silecek, temizleyecekkk
+    void deleteAllNotes(); //database'den tüm notları silecek, temizleyecek
 
     @Query("SELECT * FROM note_table ORDER BY priority DESC")
-    LiveData<List<Note>> getAllNotes(); ////notları priority propertysine göre sıralayıp liste olarak döndürecek
+    LiveData<List<Note>> getAllNotes(); //notları priority propertysine göre sıralayıp liste olarak döndürecek
 
 
 }
