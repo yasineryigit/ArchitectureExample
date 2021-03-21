@@ -17,20 +17,21 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private List<Note> notes = new ArrayList<>();
+    private OnItemClickListener listener;
 
-    public void setNotes(List notes){
-        this.notes=notes;
+    public void setNotes(List notes) {
+        this.notes = notes;
         notifyDataSetChanged();
     }
 
-    public Note getNoteAt(int position){
+    public Note getNoteAt(int position) {
         return notes.get(position);
     }
 
     @NonNull
     @Override
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
         return new NoteHolder(view);
     }
 
@@ -47,18 +48,36 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     }
 
 
-
-    public class NoteHolder extends RecyclerView.ViewHolder{
+    public class NoteHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;
         private TextView textViewPriority;
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTitle=itemView.findViewById(R.id.text_view_title);
-            textViewPriority=itemView.findViewById(R.id.text_view_priority);
-            textViewDescription=itemView.findViewById(R.id.text_view_description);
+            textViewTitle = itemView.findViewById(R.id.text_view_title);
+            textViewPriority = itemView.findViewById(R.id.text_view_priority);
+            textViewDescription = itemView.findViewById(R.id.text_view_description);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();//listener varsa ve tıklanan bi yer varsa
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(notes.get(position));
+                    }
+
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Note note);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
 }
