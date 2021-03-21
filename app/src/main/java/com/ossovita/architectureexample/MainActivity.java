@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Note> notes) {
                 //veriler değiştiği zaman adapter üzerinden setNotes metodu aracılığıyla güncel listeyi recycler'a gönderiyoruz
                 //en güncel notes listesini alıp recycler'a gönderiyoruz olay bu.
-                adapter.setNotes(notes);
+                adapter.submitList(notes);
             }
         });
 
